@@ -1,0 +1,22 @@
+feature,type,test,statistic,p_value,train_mean,test_mean,drift_flag
+age,Numeric,KS Test,0.016,0.254717,44.693,45.0698,No drift
+length_of_stay_hours,Numeric,KS Test,0.0146,0.361965,19.5827,19.427,No drift
+billed_amount,Numeric,KS Test,0.0229,0.029669,20794.5166,21175.721,No drift
+days_since_registration,Numeric,KS Test,0.4927,0.0,40.0188,150.1544,DRIFT DETECTED
+visit_frequency,Numeric,KS Test,0.004,1.0,5.9619,5.9568,No drift
+avg_los_per_patient,Numeric,KS Test,0.0093,0.876235,19.5385,19.6038,No drift
+payment_days,Numeric,KS Test,0.0104,0.775785,12.5958,12.6378,No drift
+approved_amount,Numeric,KS Test,0.0158,0.267957,15408.1454,15798.5962,No drift
+department,Categorical,Chi-square,9.7247,0.083422,N/A,N/A,No drift
+visit_type,Categorical,Chi-square,0.0277,0.986258,N/A,N/A,No drift
+city,Categorical,Chi-square,9.7273,0.083342,N/A,N/A,No drift
+gender,Categorical,Chi-square,0.3962,0.529046,N/A,N/A,No drift
+insurance_provider,Categorical,Chi-square,7.9831,0.046362,N/A,N/A,DRIFT DETECTED
+risk_score,Categorical,Chi-square,0.5366,0.764677,N/A,N/A,No drift
+claim_status,Categorical,Chi-square,2.679,0.261977,N/A,N/A,No drift
+risk_prediction_class_Low,Prediction (Categorical),Visual comparison,0.008,,0.5,0.996,Stable
+risk_prediction_class_Medium,Prediction (Categorical),Visual comparison,0.008,,0.3,0.004,Stable
+risk_prediction_class_High,Prediction (Categorical),Visual comparison,0.0,,0.201,0.0,Stable
+claim_prediction_class_Paid,Prediction (Categorical),Visual comparison,0.155,,0.597,0.971,Shift detected
+claim_prediction_class_Pending,Prediction (Categorical),Visual comparison,0.001,,0.249,0.003,Stable
+claim_prediction_class_Rejected,Prediction (Categorical),Visual comparison,0.154,,0.153,0.026,Shift detected

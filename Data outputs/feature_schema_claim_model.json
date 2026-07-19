@@ -1,0 +1,82 @@
+{
+  "claim_outcome_model": {
+    "model_name": "claim_outcome_classifier",
+    "algorithm": "XGBoost (multi:softprob, early-stopped, regularized, SMOTE-balanced training)",
+    "target_variable": "claim_status",
+    "target_encoding": {
+      "Paid": 0,
+      "Pending": 1,
+      "Rejected": 2
+    },
+    "categorical_features": {
+      "insurance_provider": [
+        "CareOne",
+        "HealthPlus",
+        "MediCareX",
+        "SecureLife"
+      ],
+      "department": [
+        "Cardiology",
+        "ER",
+        "General",
+        "ICU",
+        "Neurology",
+        "Orthopedics"
+      ],
+      "visit_type": [
+        "ER",
+        "ICU",
+        "OPD"
+      ]
+    },
+    "numeric_features": [
+      "billed_amount",
+      "length_of_stay_hours",
+      "chronic_flag",
+      "days_since_registration",
+      "visit_month",
+      "visit_day_of_week",
+      "visit_is_weekend",
+      "visit_quarter",
+      "provider_rejection_rate"
+    ],
+    "boolean_features": [
+      "billed_amount_is_outlier"
+    ],
+    "final_feature_order": [
+      "insurance_provider_enc",
+      "department_enc",
+      "visit_type_enc",
+      "billed_amount",
+      "length_of_stay_hours",
+      "chronic_flag",
+      "days_since_registration",
+      "visit_month",
+      "visit_day_of_week",
+      "visit_is_weekend",
+      "visit_quarter",
+      "provider_rejection_rate",
+      "billed_amount_is_outlier"
+    ],
+    "preprocessing": {
+      "categorical_encoding": "LabelEncoder (unseen categories mapped to -1)",
+      "class_imbalance_handling": "SMOTE (training data only, post-split)",
+      "provider_rejection_rate_note": "Computed from TRAINING SET ONLY (post-split) to avoid leakage"
+    },
+    "train_val_test_split": "time-based, chronological train (68%) / validation (12%) / test (20%)",
+    "best_model": "xgboost",
+    "best_iteration": 152,
+    "test_set_performance": {
+      "accuracy": 0.5656,
+      "macro_auroc": 0.5713,
+      "macro_f1": 0.3051,
+      "rejected_recall": 0.1525,
+      "rejected_auroc": 0.6484,
+      "rejected_auprc": 0.2111
+    },
+    "pre_modeling_signal_check": {
+      "max_effect_size_found": 0.0142,
+      "interpretation": "negligible; predicted near-random performance before training"
+    }
+  }
+}

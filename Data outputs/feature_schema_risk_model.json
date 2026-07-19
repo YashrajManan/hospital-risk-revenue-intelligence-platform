@@ -1,0 +1,85 @@
+{
+  "model_name": "visit_risk_classifier",
+  "algorithm": "XGBoost (multi:softprob, early-stopped, regularized)",
+  "target_variable": "risk_score",
+  "target_encoding": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 2
+  },
+  "categorical_features": {
+    "department": [
+      "Cardiology",
+      "ER",
+      "General",
+      "ICU",
+      "Neurology",
+      "Orthopedics"
+    ],
+    "visit_type": [
+      "ER",
+      "ICU",
+      "OPD"
+    ],
+    "city": [
+      "Bangalore",
+      "Chennai",
+      "Delhi",
+      "Hyderabad",
+      "Mumbai",
+      "Pune"
+    ],
+    "gender": [
+      "F",
+      "M"
+    ]
+  },
+  "numeric_features": [
+    "age",
+    "chronic_flag",
+    "length_of_stay_hours",
+    "doctor_id",
+    "visit_frequency",
+    "avg_los_per_patient",
+    "days_since_registration",
+    "visit_month",
+    "visit_day_of_week",
+    "visit_is_weekend",
+    "visit_quarter"
+  ],
+  "final_feature_order": [
+    "department_enc",
+    "visit_type_enc",
+    "city_enc",
+    "gender_enc",
+    "age",
+    "chronic_flag",
+    "length_of_stay_hours",
+    "doctor_id",
+    "visit_frequency",
+    "avg_los_per_patient",
+    "days_since_registration",
+    "visit_month",
+    "visit_day_of_week",
+    "visit_is_weekend",
+    "visit_quarter"
+  ],
+  "preprocessing": {
+    "categorical_encoding": "LabelEncoder (unseen categories mapped to -1)"
+  },
+  "train_val_test_split": "time-based, chronological train (68%) / validation (12%) / test (20%)",
+  "best_model": "xgboost",
+  "best_iteration": 38,
+  "test_set_performance": {
+    "accuracy": 0.4956,
+    "macro_auroc": 0.5338,
+    "macro_f1": 0.2269,
+    "high_risk_recall": 0.0,
+    "high_risk_auroc": 0.5089,
+    "high_risk_auprc": 0.2154
+  },
+  "pre_modeling_signal_check": {
+    "max_effect_size_found": 0.0197,
+    "interpretation": "negligible-to-weak; predicted near-random performance before training"
+  }
+}
